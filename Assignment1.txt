@@ -1,0 +1,21 @@
+Assignment 1, from September 4:
+
+1. Form a team of 2-5 people
+2. Write code that crawls a website or pulls data from an API, and stores
+that data as raw text files.
+     - If crawling a website (e.g. Wikipedia), the application should
+     follow links at least 2 deep.  That is, if you start the application
+     at page A, and it links to page B, you should also collect all of the
+     pages that B links to.
+     - If pulling data with an API, draw from at least three resources
+     (i.e. types of data) that can be connected in some way.  For instance,
+     if you are pulling random tweets from Twitter, you might also collect
+     (1) profile information and (2) friend/follower lists for the people
+     that tweeted.
+3. I recommend trying to get data you think would be interesting to work
+with and/or visualize.  This would save you later work for the mid-term
+project. 
+4. Try to collect at least 10 megabytes worth of data (but no more than
+100M; we'll get to the big data later).
+
+By September 11, your team will hand in your code and some sample data (<1Mb).
