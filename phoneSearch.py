@@ -17,7 +17,7 @@ print match_string
 
 phones = re.compile(match_string)
 
-fh = open("testPhones.txt")
+fh = open("testEmails.txt")
 
 print "Match"
 for line in fh:
