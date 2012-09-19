@@ -35,9 +35,11 @@ for tweet in someTweets:
     tweets.extend(tweet['text'])
     urls.extend(regexurls.findall(tweet['text']))
     location_str.append(tweet['user']['location'])
+    print tweet['user']['location']
     friends.append(tweet['user']['friends_count'])
     followers.append(tweet['user']['followers_count'])
 
+first = True
 br = mechanize.Browser()
 br.set_handle_robots(False)
 for locstr in location_str:
@@ -47,6 +49,9 @@ for locstr in location_str:
     time.sleep(1)
     response = br.open("http://maps.googleapis.com/maps/api/geocode/json?address=" + urllib.quote_plus(ascii_locstr) + "&sensor=false")
     location_json = response.read()
+    if first:
+        pp.pprint(location_json)
+        first = False
     try:
         location = json.loads(location_json)
     except:
