@@ -3,7 +3,8 @@ import mechanize
 
 ljuser="debutante-coder"
 
-def getFriends(br,ljnet,ljuser,depth):
+def getFriends(ljnet,ljuser,depth):
+	br = mechanize.Browser()
 	profile_url = 'http://users.livejournal.com/' + ljuser + '/profile'
 	try:
 		br.open(profile_url)
@@ -15,7 +16,7 @@ def getFriends(br,ljnet,ljuser,depth):
 		for link in br.links(url_regex="profile"):
 			if link.text != "[IMG]":
 				if depth < 2:
-					templist = getFriends(br,ljnet,link.text,depth+1)
+					templist = getFriends(ljnet,link.text,depth+1)
 					ljnet.extend(templist)
 				else:
 					ljnet.append(ljuser + "," + link.text + "\n")
@@ -23,9 +24,9 @@ def getFriends(br,ljnet,ljuser,depth):
 
 
 ljnetwork = []
-br = mechanize.Browser()
 depth=0
-ljnetwork.extend(getFriends(br,ljnetwork,ljuser,depth))
+ljnetwork = getFriends(ljnetwork,ljuser,depth)
+#ljnetwork = getFriends([],"debutante-coder",0)
 fh = open("friendlist.csv","w")
 for line in ljnetwork:
 	fh.write(line)
