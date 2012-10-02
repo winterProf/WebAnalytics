@@ -3,7 +3,7 @@
 import sys
 
 for line in sys.stdin:
-    ngram, year, cnt, pgs, bks = line.strip().split("\t")
-    words = ngram.split(" ")
-    if "bird" in words:
-        print '%s\t%s\t%s' % (ngram, year, cnt)
+    cols = line.strip().split("\t")
+    words = cols[0].split(" ")
+    if "pie" in words and len(cols>2):
+        print '%s\t%s\t%s' % (cols[0], cols[1], cols[2])

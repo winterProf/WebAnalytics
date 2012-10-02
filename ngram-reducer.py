@@ -2,9 +2,9 @@
 
 import sys
 
-current_word = None
+current_ngram = None
 current_count = 0
-word = None
+ngram = None
  
 # input comes from STDIN
 for line in sys.stdin:
