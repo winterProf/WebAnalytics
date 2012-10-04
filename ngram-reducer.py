@@ -8,7 +8,7 @@ ngram = None
  
 # input comes from STDIN
 for line in sys.stdin:
-    ngram, year, cnt = line.strip().split("\t")
+    ngram, cnt = line.strip().split("\t")
     
     # convert cnt (currently a string) to int
     try:
