@@ -16,9 +16,10 @@ CONSUMER_SECRET = "ybTOvljBWmnhG5BWqioM1crZoydTMZ0WbucNRspsus"
 
 # Create a TwitterTools instance
 t = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_SECRET))
+ts = TwitterStream(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_SECRET))
 
 # Get a random selection of tweets from public timeline
-someTweets = t.statuses.public_timeline()
+someTweets = ts.twitter_stream.statuses.sample()
 #pp.pprint(someTweets[0])
 
 first = True
