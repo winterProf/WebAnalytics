@@ -23,6 +23,7 @@ ts = TwitterStream(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_
 
 # Get a random selection of tweets from public timeline
 someTweets = ts.statuses.sample()
+
 #pp.pprint(someTweets[0])
 
 first = True
@@ -42,11 +43,12 @@ for i in range(0, NUMTWEETS):
         if first:
             pp.pprint(tweet)
             first = False
-        tweets.extend(tweet['text'])
-        urls.extend(regexurls.findall(tweet['text']))
-        location_str.append(tweet['user']['location'])
-        friends.append(tweet['user']['friends_count'])
-        followers.append(tweet['user']['followers_count'])
+        if 'text' in tweet:
+            tweets.extend(tweet['text'])
+            urls.extend(regexurls.findall(tweet['text']))
+            location_str.append(tweet['user']['location'])
+            friends.append(tweet['user']['friends_count'])
+            followers.append(tweet['user']['followers_count'])
 
 br = mechanize.Browser()
 br.set_handle_robots(False)

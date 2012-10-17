@@ -5,10 +5,10 @@ import re
 from time import strftime,strptime
 
 # Secret Keys
-oauth_token = "563118238-vROWGhnOwsIXM3F2kKhwiZjqdainQmfH85zE0qVD"
-oauth_secret = "0wiCCMzrL6P9esfTkf6avgelAT7PHLFlUZpnaSyCl4"
-CONSUMER_KEY = "uX6aVpYRbM0SxHjqIvKqQ"
-CONSUMER_SECRET = "ybTOvljBWmnhG5BWqioM1crZoydTMZ0WbucNRspsus"
+# oauth_token = "563118238-vROWGhnOwsIXM3F2kKhwiZjqdainQmfH85zE0qVD"
+# oauth_secret = "0wiCCMzrL6P9esfTkf6avgelAT7PHLFlUZpnaSyCl4"
+# CONSUMER_KEY = "uX6aVpYRbM0SxHjqIvKqQ"
+# CONSUMER_SECRET = "ybTOvljBWmnhG5BWqioM1crZoydTMZ0WbucNRspsus"
 
 #t = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_SECRET), api_version="1.1")
 #ts = TwitterStream(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_SECRET), api_version="1.1")
@@ -47,8 +47,8 @@ def getTweets(tags,sentiment=False,debate=False):
 		for tweet in tweets['results']:
 			if 'text' in tweet:
 				# date format: u'Tue Oct 16 20:11:05 +0000 2012'
-				# tweetdate = strftime("%H:%M",strptime("%a %b %d %H:%M:%S +0000 %Y",tweet['created_at']))
-				tweetdate = tweet['created_at'][17:25]
+				tweetdate = strftime("%m_%d_%H_%M",strptime(tweet['created_at'][5:25].encode('utf8'),"%d %b %Y %H:%M:%S"))[:-1]
+				#tweetdate = tweet['created_at'][17:22]
 				if tweetdate in tag_times:
 					tag_times[tweetdate].append(tweet['text'])
 				else:
@@ -58,7 +58,7 @@ def getTweets(tags,sentiment=False,debate=False):
 
 
 # GOP hashtags
-GOP = ["#romney","#tco","#gop","#romney","@mittromney","#cantafford4more","@PaulRyanVP"]
+GOP = ["#romney","#tcot","#gop","#romney","@mittromney","#cantafford4more","@PaulRyanVP"]
 Dem = ["#obama","@barackobama","#mittmath","#teamobamabiden","@biden"]
 
 # get Tweets
@@ -75,9 +75,9 @@ tw_T.sort()
 allGOP_t = [ len(allGOP[str(x)]) if x in allGOP else 0 for x in tw_T ]
 allDem_t = [ len(allDem[str(x)]) if x in allDem else 0 for x in tw_T ]
 posGOP_t = [ len(posGOP[str(x)]) if x in posGOP else 0 for x in tw_T ]
-posDem_t = [ posDem[str(x)] if x in posDem else 0 for x in tw_T ]
-negGOP_t = [ negGOP[str(x)] if x in negGOP else 0 for x in tw_T ]
-negDem_t = [ negDem[str(x)] if x in negDem else 0 for x in tw_T ]
+posDem_t = [ len(posDem[str(x)]) if x in posDem else 0 for x in tw_T ]
+negGOP_t = [ len(negGOP[str(x)]) if x in negGOP else 0 for x in tw_T ]
+negDem_t = [ len(negDem[str(x)]) if x in negDem else 0 for x in tw_T ]
 
 #debate-only Tweets
 debGOP = getTweets(GOP,False,True)
@@ -90,20 +90,20 @@ negdebDem = getTweets(Dem,"neg",True)
 # time series of debate tweets
 twdeb_T = unq(debGOP.keys() + debDem.keys() + posdebGOP.keys() + posdebDem.keys() + negdebGOP.keys() + negdebDem.keys())
 twdeb_T.sort()
-debGOP_t = [ debGOP[str(x)] if x in debGOP else 0 for x in twdeb_T ]
-debDem_t = [ debDem[str(x)] if x in debDem else 0 for x in twdeb_T ]
-posdebGOP_t = [ posdebGOP[str(x)] if x in posdebGOP else 0 for x in twdeb_T ]
-posdebDem_t = [ posdebDem[str(x)] if x in posdebDem else 0 for x in twdeb_T ]
-negdebGOP_t = [ negdebGOP[str(x)] if x in negdebGOP else 0 for x in twdeb_T ]
-negdebDem_t = [ negdebDem[str(x)] if x in negdebDem else 0 for x in twdeb_T ]
+debGOP_t = [ len(debGOP[str(x)]) if x in debGOP else 0 for x in twdeb_T ]
+debDem_t = [ len(debDem[str(x)]) if x in debDem else 0 for x in twdeb_T ]
+posdebGOP_t = [ len(posdebGOP[str(x)]) if x in posdebGOP else 0 for x in twdeb_T ]
+posdebDem_t = [ len(posdebDem[str(x)]) if x in posdebDem else 0 for x in twdeb_T ]
+negdebGOP_t = [ len(negdebGOP[str(x)]) if x in negdebGOP else 0 for x in twdeb_T ]
+negdebDem_t = [ len(negdebDem[str(x)]) if x in negdebDem else 0 for x in twdeb_T ]
 
 
 plt.subplots_adjust(wspace=0.5)
 plt.subplot(211)
-plt.plot(tw_T,allGOP_t,'r:',allDem_t,'b:',posGOP_t,'r-+',posDem_t,'b-+',negGOP_t,'r-.x',negDem_t,'b-.x')
+plt.plot(range(len(tw_T)),allGOP_t,'r:',allDem_t,'b:',posGOP_t,'r-+',posDem_t,'b-+',negGOP_t,'r-.x',negDem_t,'b-.x')
 
 plt.subplot(212)
-plt.plot(twdeb_T,debGOP_t,'r:',debDem_t,'b:',posdebGOP_t,'r-+',posdebDem_t,'b-+',negdebGOP_t,'r-.x',negdebDem_t,'b-.x')
+plt.plot(range(len(twdeb_T)),debGOP_t,'r:',debDem_t,'b:',posdebGOP_t,'r-+',posdebDem_t,'b-+',negdebGOP_t,'r-.x',negdebDem_t,'b-.x')
 plt.show()
 
 
