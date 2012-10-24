@@ -69,18 +69,20 @@ def drawNetwork(ljnetwork):
 	ljnet.remove_edges_from(ljnet.selfloop_edges())
 
 	# pull out k-core of graph
-	twocore = nx.k_core(ljnet,2)
-	fivecore = nx.k_core(ljnet,5)
+#	twocore = nx.k_core(ljnet,2)
+#	fivecore = nx.k_core(ljnet,5)
 
 	# get degrees of nodes
 	degdist = nx.degree(ljnet)
-	degcore = nx.degree(fivecore)
+#	degcore = nx.degree(fivecore)
 
 	# draw network
 	pos=nx.spring_layout(ljnet)
-	core_pos = extract(fivecore.nodes(),pos)
-	nx.draw_networkx_nodes(fivecore,pos,nodelist=degcore.keys(),node_color='b',node_size=20*(1.0 + np.log(degcore.values())),with_labels=True,font_color='r',font_size=18)
-	nx.draw_networkx_nodes(ljnet,pos,nodelist=degdist.keys(),node_color='g',node_size=20*(1.0+np.log(degdist.values())),with_labels=False)
+#	core_pos = extract(fivecore.nodes(),pos)
+#	nx.draw_networkx_nodes(fivecore,pos,nodelist=degcore.keys(),node_color='b',node_size=20*(1.0 + np.log(degcore.values())),with_labels=True,font_color='r',font_size=18)
+
+	nx.draw_networkx_nodes(ljnet, pos, nodelist=degdist.keys(), node_color='g',node_size=20*(1.0+np.log(degdist.values())),with_labels=True,font_color='r')
+
 	nx.draw_networkx_edges(ljnet,pos,alpha=0.4)
 	plt.show()
 
