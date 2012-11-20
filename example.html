@@ -1,0 +1,96 @@
+<html>
+<head>
+	<title>Something Else</title>
+	<script src="jquery-1.8.2.min.js"></script>
+	<script src="example.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$("#box1").click(function() {
+			$(this).animate({width:200,height:200,opacity:0.5},1500)
+		});
+		$("#plite").click(function() {
+			$(this).toggleClass("highlight");
+			$(this).html("The text is new")
+		})
+	});
+	</script>
+	<link rel="stylesheet" type="text/css" href="example.css">
+</head>
+<body>
+	Here is the first sentence.<br>
+	This is a second sentence.
+	<blockquote> Somebody said something special </blockquote>
+	<hr>
+	<div> This is in a div. </div>
+	<p id="plite"> This is an another paragraph. </p>
+	
+	
+	<div class="big">This is big text</div>
+	<div class="red">This is red text</div>
+	<div class="big red">This is big red text</div>
+	
+	
+	<span id="span1"> This is in a span. </span>
+	<span id="span2" class="red"> This is in another span. </span>
+	<div> This is another div. 
+		<a> This is not a link </a>
+		<a href="http://google.com">Google</a>
+		<a href="_target" onclick="alert('Boo!');return false;">Ghost</a>
+	</div>
+	<div>
+		<ul>
+			<li> Bread </li>
+			<li> Milk </li>
+		</ul>
+		<dl>
+			<dt>Link</dt>
+			<dd><i>n.</i> A connection between two nodes</dd>
+			<dt>Node</dt>
+			<dd><i>n.</i> A thing that is connected by links</dd>
+		</dl>
+	</div>
+	<table>
+		<tr>
+			<td> Cell 1 </td>
+			<td> Cell 2 </td>
+		</tr>
+		<tr>
+			<td> Cell 3 </td>
+			<td> Cell 4 </td>
+		</tr>
+	</table>
+	<div> The form begins here</div>
+	<form action="submit_form.php">
+		<p>
+			<input type="radio" name="gender" value="man">Man</input>
+			<input type="radio" name="gender" value="woman">Woman</input>
+		</p>
+		<p>
+			<input type="checkbox" name="color" value="blue">Blue</input>
+			<input type="checkbox" name="color" value="red">Red</input>
+			<input type="checkbox" name="color" value="greeb">Green</input>
+		</p>
+		<p>
+			<select name="dropdown">
+				<option>Option 1</option>
+				<option>Option 2</option>
+				<option>Option 3</option>
+			</select>
+		</p>
+		<p>
+			<input type="text" size=20>
+				Label for the text field
+			</input>
+		</p>
+		<p>
+			<textarea cols=80 rows=6>Content in text area is editable</textarea>
+		</p>
+		<p>
+			<input type="submit" value="Click Here"/>
+		</p>
+	</form>
+	<div> The form ends here </div>
+	
+	<div id="box1">This is a box</div>
+</body>
+</html>

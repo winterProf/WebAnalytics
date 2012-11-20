@@ -1,0 +1,36 @@
+table
+{
+	background: green;
+	font-size: 30px;
+	border: double blue 5px;
+}
+table td
+{
+	border: black 1px dashed;
+}
+#span1
+{
+	color: red;
+}
+#span2
+{
+	color: blue;
+}
+.big
+{
+	font-size: 30px;
+}
+.red
+{
+	color: red;
+}
+#box1
+{
+	width: 100px;
+	height: 100px;
+	background: gray;
+}
+.highlight
+{
+	background: yellow;
+}
